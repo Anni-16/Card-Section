@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Card Layout</title>
+
+    <!-- Bootstrap 5.0 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        :root {
+            --card-height: 380px;
+            --card-width: calc(var(--card-height) / 1.5);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        .back_bg {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #FEF4F5;
+            flex-wrap: wrap;
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center ;
+            flex-wrap: wrap;
+            margin-top: 50px ;
+        }
+
+        #row-2{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center ;
+            flex-wrap: wrap;
+        }
+        
+        .card {
+            width: var(--card-width);
+            height: var(--card-height);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            perspective: 2500px;
+            margin: 10px;
+            padding: 0px;
+        }
+        
+        .cover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .wrapper {
+            transition: all 0.5s;
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+            margin: 0;
+        }
+        
+        .card:hover .wrapper {
+            transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+            box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        }
+        
+        .wrapper::before,
+        .wrapper::after {
+            content: "";
+            opacity: 0;
+            width: 100%;
+            height: 80px;
+            transition: all 0.5s;
+            position: absolute;
+            left: 0;
+        }
+        
+        .wrapper::before {
+            top: 0;
+            height: 100%;
+            background-image: linear-gradient(
+                to top,
+                transparent 46%,
+                rgba(12, 13, 19, 0.5) 68%,
+                rgba(12, 13, 19) 97%
+            );
+        }
+        
+        .wrapper::after {
+            bottom: 0;
+            opacity: 1;
+            background-image: linear-gradient(
+                to bottom,
+                transparent 46%,
+                rgba(12, 13, 19, 0.5) 68%,
+                rgba(12, 13, 19) 97%
+            );
+        }
+        
+        .card:hover .wrapper::before,
+        .card:hover .wrapper::after {
+            opacity: 1;
+        }
+        
+        .card:hover .wrapper::after {
+            height: 120px;
+        }
+        
+        .title {
+            width: 100%;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .title {
+            transform: translate3d(0%, -50px, 100px);
+        }
+        
+        .character {
+            width: 100%;
+            opacity: 0;
+            transition: all 0.5s;
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .card:hover .character {
+            opacity: 1;
+            transform: translate3d(0%, -30%, 100px);
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --card-height: 320px; /* Smaller card height for tablets */
+            }
+            .card {
+                margin: 5px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            :root {
+                --card-height: 280px; /* Even smaller card height for mobile */
+            }
+        }
+    </style>
+</head>
+<body>  
+    <div class="back_bg">
+        <!-- Row 1 -->
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-6 mt-4">
+                <div class="card">
+                    <div class="wrapper">
+                        <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-cover.jpg" class="cover-image" />
+                    </div>
+                    <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png" class="title" />
+                    <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-character.webp" class="character" />
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <div class="wrapper">
+                        <img src="https://ggayane.github.io/css-experiments/cards/force_mage-cover.jpg" class="cover-image" />
+                    </div>
+                    <img src="https://ggayane.github.io/css-experiments/cards/force_mage-title.png" class="title" />
+                    <img src="https://ggayane.github.io/css-experiments/cards/force_mage-character.webp" class="character" />
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <div class="wrapper">
+                        <img src="https://ggayane.github.io/css-experiments/cards/force_mage-cover.jpg" class="cover-image" />
+                    </div>
+                    <img src="https://ggayane.github.io/css-experiments/cards/force_mage-title.png" class="title" />
+                    <img src="https://ggayane.github.io/css-experiments/cards/force_mage-character.webp" class="character" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="row" id="row-2">
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <div class="wrapper">
+                        <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-cover.jpg" class="cover-image" />
+                    </div>
+                    <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png" class="title" />
+                    <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-character.webp" class="character" />
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <div class="wrapper">
+                        <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-cover.jpg" class="cover-image" />
+                    </div>
+                    <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png" class="title" />
+                    <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-character.webp" class="character" />
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <div class="wrapper">
+                        <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-cover.jpg" class="cover-image" />
+                    </div>
+                    <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png" class="title" />
+                    <img src="https://ggayane.github.io/css-experiments/cards/dark_rider-character.webp" class="character" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
